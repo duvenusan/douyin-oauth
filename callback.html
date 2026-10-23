@@ -101,6 +101,8 @@
   }
   .status.ok   { background: var(--acid-dim);   color: var(--acid);   border: 1px solid rgba(216,255,75,0.28); }
   .status.bad  { background: var(--danger-dim); color: var(--danger); border: 1px solid rgba(255,92,92,0.3); }
+  /* 中性信息态：直接打开页面时用。红色会被误读成报错，而这里其实是"正常"。 */
+  .status.info { background: rgba(255,255,255,0.045); color: var(--fg-2); border: 1px solid var(--line); }
   .status b { font-weight: 700; }
 
   h1 {
@@ -362,7 +364,7 @@
 
   <!-- ---------- 直接打开 ---------- -->
   <section id="idleView" class="hidden">
-    <div class="status bad"><b>这是回调页</b></div>
+    <div class="status info"><b>这是回调页</b></div>
     <h1>没有授权参数，正常</h1>
     <p class="lede">
       这个页面只用来接收抖音跳转回来的授权码，直接打开是空的。
