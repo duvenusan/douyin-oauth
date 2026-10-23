@@ -13,64 +13,51 @@ deploy/
 
 ---
 
-## 一、三分钟挂上去（全程网页操作，不用命令行）
+## 一、已经挂好了
 
-**1. 注册 / 登录 GitHub** → <https://github.com>
-
-**2. 新建仓库**
-右上角 `+` → New repository
-- Repository name：`douyin-oauth`（随便起，后面会用到这个名字）
-- 选 **Public**（Private 仓库的 Pages 要付费）
-- 不要勾 Add README
-- Create repository
-
-**3. 上传文件**
-新仓库页面点 `uploading an existing file`（或者 Add file → Upload files）
-把 `deploy/` 里的 **`callback.html`** 和 **`index.html`** 两个文件一起拖进去
-→ 底部 `Commit changes`
-
-**4. 开 Pages**
-仓库 → Settings → 左侧 Pages
-- Source：**Deploy from a branch**
-- Branch：**main**，目录选 **/ (root)**
-- Save
-
-等 1–2 分钟，页面顶部会出现：
+本项目**已部署**，正式回调地址是：
 
 ```
-Your site is live at https://你的用户名.github.io/douyin-oauth/
+https://duvenusan.github.io/douyin-oauth/callback.html
 ```
 
-**5. 验证**
-浏览器打开 `https://你的用户名.github.io/douyin-oauth/callback.html`
+仓库：<https://github.com/duvenusan/douyin-oauth>（Public，Pages 已开，main / root）
 
-应该看到「这是回调页 / 没有授权参数，正常」。
+浏览器打开上面那个地址，应该看到「这是回调页 / 没有授权参数，正常」。看到就说明可用。
 
-看到这个就说明挂好了。
+> 以后若要改页面内容：改 `deploy/callback.html` → 提交 → 推送到该仓库，
+> 1 分钟内生效。不需要重新配置 Pages。
 
 ---
 
 ## 二、把这个地址填进两个地方
 
-假设你的地址是 `https://zhoutongxue.github.io/douyin-oauth/callback.html`
-
 ### 1）抖音开放平台后台
 
 应用详情 → 基本信息 → **授权回调域**
 
-填：`zhoutongxue.github.io`
+填：`duvenusan.github.io`
 
-> 有些版本的表单要求带协议，那就填 `https://zhoutongxue.github.io`。
+> 有些版本的表单要求带协议，那就填 `https://duvenusan.github.io`。
 > **以输入框的提示为准**，别自己加路径。
+> 回调域是**域级**的，所以不用填 `/douyin-oauth/callback.html` 这一段。
 
 ### 2）`collector/config.json`
+
+不用手写，跑向导即可：
+
+```bash
+python collector/douyin.py setup
+```
+
+它问回调地址时，只填 `duvenusan` 也能自动拼成完整地址。手工版长这样：
 
 ```json
 {
   "douyin": {
     "client_key": "你的 Client Key",
     "client_secret": "你的 Client Secret",
-    "redirect_uri": "https://zhoutongxue.github.io/douyin-oauth/callback.html",
+    "redirect_uri": "https://duvenusan.github.io/douyin-oauth/callback.html",
     "scope": "user_info,video.list,video.data"
   }
 }
